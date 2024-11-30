@@ -1,0 +1,224 @@
+:root {
+  --color1: rgb(0, 231, 255);
+  --color2: rgb(255, 0, 231);
+
+  --pika1: #54a29e;
+  --pika2: #a79d66;
+  --pikafront: url(https://i.imgur.com/QBYsQUu.jpeg);
+}
+
+.card {
+  width: 90vw;
+  height: 120vw;
+  position: relative;
+  overflow: hidden;
+  margin: 20px;
+  overflow: hidden;
+  z-index: 10;
+  touch-action: none;
+  border-radius: 5% / 3.5%;
+  box-shadow: -5px -5px 5px -5px var(--color1), 5px 5px 5px -5px var(--color2),
+    -7px -7px 10px -5px transparent, 7px 7px 10px -5px transparent,
+    0 0 5px 0px rgba(255, 255, 255, 0), 0 55px 35px -20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease, box-shadow 0.2s ease;
+  will-change: transform, filter;
+  background-color: #040712;
+  background-image: var(--front);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  transform-origin: center;
+
+  @media screen and (min-width: 600px) {
+    width: clamp(20vw, 80vh, 25vw);
+    height: clamp(30vw, 100vh, 35vw);
+  }
+}
+
+.card:hover {
+  box-shadow: -20px -20px 30px -25px var(--color1),
+    20px 20px 30px -25px var(--color2), -7px -7px 10px -5px var(--color1),
+    7px 7px 10px -5px var(--color2), 0 0 13px 4px rgba(255, 255, 255, 0.3),
+    0 55px 35px -20px rgba(0, 0, 0, 0.5);
+}
+
+.card.pika {
+  --color1: var(--pika1);
+  --color2: var(--pika2);
+  --front: var(--pikafront);
+}
+
+.card:before,
+.card:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  mix-blend-mode: color-dodge;
+  transition: all 0.33s ease;
+}
+
+.card:before {
+  background-position: 50% 50%;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    115deg,
+    transparent 0%,
+    var(--color1) 25%,
+    transparent 47%,
+    transparent 53%,
+    var(--color2) 75%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  filter: brightness(0.5) contrast(1);
+  z-index: 1;
+}
+
+.card.active,
+.card:hover {
+  animation: none;
+  transition: box-shadow 0.1s ease-out;
+}
+
+.card.active:before,
+.card:hover:before,
+.card.active:after,
+.card:hover:after {
+  animation: none;
+  transition: none;
+}
+
+.card.animated {
+  transition: none;
+  animation: holoCard 12s ease 0s 1;
+  &:before {
+    transition: none;
+    animation: holoGradient 12s ease 0s 1;
+  }
+  &:after {
+    transition: none;
+    animation: holoSparkle 12s ease 0s 1;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #333844;
+  padding: 0;
+  z-index: 1;
+  transform: translate3d(0, 0, 0.1px);
+}
+body {
+  color: white;
+  background-color: #333844;
+  font-family: 'Heebo', sans-serif;
+  text-align: center;
+}
+
+#app {
+  position: relative;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column; /* Keeps it a column layout */
+  align-items: center;
+  justify-content: center; /* Centers items vertically */
+  perspective: 2000px;
+  position: absolute; /* Position the container */
+  top: 50%; /* Move to the vertical center */
+  left: 50%; /* Move to the horizontal center */
+  transform: translate(-50%, -50%); /* Center it perfectly */
+  z-index: 1;
+}
+
+@media screen and (min-width: 600px) {
+  .cards {
+    flex-direction: row;
+  }
+}
+
+.cards .card {
+  &:nth-child(2) {
+    &,
+    &:before,
+    &:after {
+      animation-delay: 0.25s;
+    }
+  }
+  &:nth-child(3) {
+    &,
+    &:before,
+    &:after {
+      animation-delay: 0.5s;
+    }
+  }
+  &:nth-child(4) {
+    &,
+    &:before,
+    &:after {
+      animation-delay: 0.75s;
+    }
+  }
+}
+
+p {
+  font-weight: 400;
+  font-size: 18px;
+  padding: 1em;
+  background: rgba(0, 0, 0, 0.3);
+  margin-top: 0;
+  animation: rubberBand 1.5s linear 3s 1;
+}
+.promo {
+  margin-top: 50px;
+}
+.promo img {
+  margin-top: 10px;
+  max-width: 80%;
+}
+p a {
+  color: cyan;
+}
+
+html,
+body,
+main {
+  min-height: 100%;
+}
+
+@keyframes rubberBand {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
