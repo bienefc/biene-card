@@ -58,6 +58,7 @@ function App() {
       <main>
         <section className='cards'>
           <div className='card pika animated'></div>
+          <p>tests</p>
         </section>
       </main>
     </>
